@@ -16,15 +16,15 @@
         <div class="field-row">
           <label class="min" for="rangeMin">Количество карт: 1</label>
           <label for="rangeMin">1</label>
-          <input id="rangeMax" type="range" min="1" max="54" value="6" />
+          <input class="card__number-range" data-change="cardNumber" data-type="number" id="rangeMax" type="range" min="1" max="54" value="6" />
           <label for="rangeMax">54</label>
         </div>
         <div class="field-row">
-          <input type="checkbox" id="translate">
-          <label for="translate">Перевод</label>
+          <input class="header" type="checkbox" id="translate">
+          <label class="card__translate" data-change="translate" data-type="bool" for="translate">Перевод</label>
         </div>
         <div class="field-row button-row">
-          <button type="submit">Получить</button>
+          <button class="get__button" type="submit">Получить</button>
         </div>
       </form>
     </div>
@@ -32,7 +32,7 @@
     <div class="content">
       <h4 class="content__title">Карточки</h4>
 
-      <div class="list">
+      <div class="list" data-display="cards">
         <div class="window card">
           <div class="title-bar">
             <div class="title-bar-text">Карта 6H</div>
@@ -53,5 +53,7 @@
       </div>
     </div>
   </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
