@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/98.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Card getter</title>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="header__title">Card getter</h1>
+      <form class="header__form" action="#">
+        <div class="field-row">
+          <label class="min" for="rangeMin">Количество карт: 1</label>
+          <label for="rangeMin">1</label>
+          <input id="rangeMax" type="range" min="1" max="54" value="6" />
+          <label for="rangeMax">54</label>
+        </div>
+        <div class="field-row">
+          <input type="checkbox" id="translate">
+          <label for="translate">Перевод</label>
+        </div>
+        <div class="field-row button-row">
+          <button type="submit">Получить</button>
+        </div>
+      </form>
+    </div>
+    
+    <div class="content">
+      <h4 class="content__title">Карточки</h4>
+
+      <div class="list">
+        <div class="window card">
+          <div class="title-bar">
+            <div class="title-bar-text">Карта 6H</div>
+            <div class="title-bar-controls">
+              <button aria-label="Minimize"></button>
+              <button aria-label="Maximize"></button>
+              <button aria-label="Close"></button>
+            </div>
+          </div>
+          <div class="window-body">
+            <p>6 HEARTS</p>
+
+            <div class="card__image">
+              <img src="https://deckofcardsapi.com/static/img/KC.svg" alt="6H">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
