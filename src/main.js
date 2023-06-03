@@ -1,5 +1,35 @@
 'use strict'
 
+function getRussianSuit(engSuit) {
+  switch (engSuit) {
+    case 'DIAMONDS':
+      return 'БУБИ';
+    case 'SPADES':
+      return 'ПИКИ';
+    case 'HEARTS':
+      return 'ЧЕРВИ';
+    case 'CLUBS':
+      return 'КРЕСТИ';
+    default: 
+      return 'UNKNOWN';
+  }
+}
+
+function getRussianValue(engValue) {
+  switch (engValue) {
+    case 'ACE':
+      return 'ТУЗ';
+    case 'QUEEN':
+      return 'КОРОЛЕВА';
+    case 'KING':
+      return 'КОРОЛЬ';
+    case 'JACK':
+      return 'ВАЛЕТ';
+    default: 
+      return engValue;
+  }
+}
+
 const state = new Proxy({
   queryParams: {
     cardNumber: 1,
@@ -15,8 +45,16 @@ const state = new Proxy({
         contentList.children[i].remove();
       }
 
-      for (const card of value) {
+      for (let card of value) {
         const playingCard = document.createElement('playing-card');
+
+        if (state.queryParams.translate) {
+          card = {
+            ...card,
+            suit: getRussianSuit(card.suit),
+            value: getRussianValue(card.value)
+          }
+        } 
         playingCard.setAttribute('card', JSON.stringify(card));
         contentList.append(playingCard);
       }
