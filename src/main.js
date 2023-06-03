@@ -1,35 +1,30 @@
 'use strict'
 
-const queryParams = {
-  cardNumber: 1,
-  translate: false
-};
+const state = new Proxy({
+  queryParams: {
+    cardNumber: 1,
+    translate: false
+  },
+  cards: []
+}, {
+  set(state, property, value) {    
+    if (property === 'cards') {
+      const contentList = document.querySelector('.content__list');
 
-const cards = new Proxy([], {
-  set(state, property, value) {
-    console.log(property, value)
-    const contentList = document.querySelector('.content__list');
-
-    if (property === 'length' && value === 0) {
-      for (const card of contentList.children) {
-        contentList.removeChild(card);
+      for (var i = contentList.children.length - 1; i >= 0; --i) {
+        contentList.children[i].remove();
       }
-    } 
-    if (property !== 'length') {
-      const playingCard = document.createElement('playing-card');
-      playingCard.setAttribute('card', JSON.stringify(value));
-      contentList.append(playingCard);
-    }
 
+      for (const card of value) {
+        const playingCard = document.createElement('playing-card');
+        playingCard.setAttribute('card', JSON.stringify(card));
+        contentList.append(playingCard);
+      }
+    }
 
     return Reflect.set(state, property, value);
   }
 });
-
-const state = {
-  queryParams,
-  cards
-};
 
 document.addEventListener('DOMContentLoaded', () => {
   const template = document.querySelector('template[name="playing-card"]');
@@ -96,15 +91,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const cardTranslate = document.querySelector('.card__translate');
 
   headerForm.addEventListener('submit', (e) => {
-    // state.cards = [];
-    state.cards.splice(0, state.cards.length)
+    state.cards = [];
     e.preventDefault();
 
     fetch(`https://deckofcardsapi.com/api/deck/new/draw/?count=${state.queryParams.cardNumber}`)
       .then(resp => resp.json())
       .then(data => {
-        // state.cards.push(...data.cards);
-        state.cards.push(...data.cards.splice(0, 2));
+        state.cards = data.cards;
       });
   });
 
