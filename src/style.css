@@ -53,23 +53,3 @@ body {
 .content__title {
   margin-bottom: 10px;
 }
-
-.card {
-  width: 100%;
-  max-width: 300px;
-}
-
-.card__image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  max-height: 300px;
-  overflow: hidden;
-}
-
-.card__image img {
-  display: block;
-  height: auto;
-  width: 250%;
-}
