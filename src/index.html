@@ -29,24 +29,28 @@
     </div>
   </template>
 
+  <template name="request-form">
+    <form class="request__form" action="#">
+      <div class="field-row">
+        <label class="min" for="rangeMin">Количество карт: 1</label>
+        <label for="rangeMin">1</label>
+        <input class="card__number-range" data-change="cardNumber" data-type="number" id="rangeMax" type="range" min="1" max="54" value="1" />
+        <label for="rangeMax">54</label>
+      </div>
+      <div class="field-row">
+        <input class="header" type="checkbox" id="translate">
+        <label class="card__translate" data-change="translate" data-type="bool" for="translate">Перевод</label>
+      </div>
+      <div class="field-row button-row">
+        <button class="get__button" type="submit">Получить</button>
+      </div>
+    </form>
+  </template>
+
   <div class="container">
     <div class="header">
       <h1 class="header__title">Card getter</h1>
-      <form class="header__form" action="#">
-        <div class="field-row">
-          <label class="min" for="rangeMin">Количество карт: 1</label>
-          <label for="rangeMin">1</label>
-          <input class="card__number-range" data-change="cardNumber" data-type="number" id="rangeMax" type="range" min="1" max="54" value="1" />
-          <label for="rangeMax">54</label>
-        </div>
-        <div class="field-row">
-          <input class="header" type="checkbox" id="translate">
-          <label class="card__translate" data-change="translate" data-type="bool" for="translate">Перевод</label>
-        </div>
-        <div class="field-row button-row">
-          <button class="get__button" type="submit">Получить</button>
-        </div>
-      </form>
+      <request-form></request-form>
     </div>
     
     <div class="content">

@@ -2,14 +2,9 @@
 
 import { getRussianSuit, getRussianValue } from './utils.js';
 import { PlayingCard, createPlayingCard } from './playing-card.js';
+import { RequestForm } from './request-form.js';
 
 const state = new Proxy({
-  queryParams: {
-    cardNumber: 1,
-  },
-  viewParams: {
-    translate: false
-  },
   cards: []
 }, {
   set(state, property, value) {    
@@ -20,14 +15,7 @@ const state = new Proxy({
         contentList.children[i].remove();
       }
 
-      for (let card of value) {
-        if (state.viewParams.translate) {
-          card = {
-            ...card,
-            suit: getRussianSuit(card.suit),
-            value: getRussianValue(card.value)
-          }
-        }
+      for (const card of value) {
         contentList.append(createPlayingCard(card));
       }
     }
@@ -42,30 +30,32 @@ document.addEventListener('DOMContentLoaded', () => {
     PlayingCard 
   );
 
-  const headerForm = document.querySelector('.header__form');
-  const cardNumberRange = document.querySelector('.card__number-range');
-  const cardTranslate = document.querySelector('.card__translate');
+  customElements.define(
+    'request-form',
+    RequestForm 
+  );
+
+  const requestForm = document.querySelector('request-form');
   const clearAllButton = document.querySelector('.clear__all');
 
-  headerForm.addEventListener('submit', (e) => {
+  requestForm.addEventListener('get-cards', (e) => {
     state.cards = [];
-    e.preventDefault();
 
-    fetch(`https://deckofcardsapi.com/api/deck/new/draw/?count=${state.queryParams.cardNumber}`)
+    fetch(`https://deckofcardsapi.com/api/deck/new/draw/?count=${e.detail.queryParams.cardNumber}`)
       .then(resp => resp.json())
       .then(data => {
-        state.cards = data.cards;
+        const cardsForView = data.cards.map(card => {
+          if (e.detail.viewParams.translate) {
+            return {
+              ...card,
+              suit: getRussianSuit(card.suit),
+              value: getRussianValue(card.value)
+            }
+          }
+          return card;
+        });
+        state.cards = cardsForView;
       });
-  });
-
-  cardNumberRange.addEventListener('change', (e) => {
-    const value = +(e.target.value);
-    state.queryParams.cardNumber = value;
-  });
-
-  cardTranslate.addEventListener('click', (e) => {
-    const value = !e.target.previousElementSibling.checked;
-    state.viewParams.translate = value;
   });
 
   clearAllButton.addEventListener('click', () => {
