@@ -4,6 +4,12 @@ export class PlayingCard extends HTMLElement {
     const template = document.querySelector('template[name="playing-card"]');
     const component = template.content.children[0].cloneNode(true);
     this.attachShadow({ mode: 'open' }).appendChild(component);
+    
+    const deleteButton = this.shadowRoot.querySelector('.remove');
+    deleteButton.addEventListener('click', () => {
+      const contentList = document.querySelector('.content__list');
+      contentList.removeChild(this);
+    });
 
     const style = document.createElement("style");
     style.textContent = `.card {
