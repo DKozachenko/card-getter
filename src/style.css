@@ -51,5 +51,13 @@ body {
 }
 
 .content__title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
   margin-bottom: 10px;
+}
+
+.content__title h4 {
+  margin: 0;
 }

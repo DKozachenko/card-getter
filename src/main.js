@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const headerForm = document.querySelector('.header__form');
   const cardNumberRange = document.querySelector('.card__number-range');
   const cardTranslate = document.querySelector('.card__translate');
+  const clearAllButton = document.querySelector('.clear__all');
 
   headerForm.addEventListener('submit', (e) => {
     state.cards = [];
@@ -65,5 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
   cardTranslate.addEventListener('click', (e) => {
     const value = !e.target.previousElementSibling.checked;
     state.viewParams.translate = value;
+  });
+
+  clearAllButton.addEventListener('click', () => {
+    state.cards = [];
   });
 });
