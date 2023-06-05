@@ -1,0 +1,21 @@
+.request__form {
+  width: 100%;
+  max-width: 300px;
+
+  padding: 10px;
+  border: 2px solid #0737a1;
+  border-radius: 10px;
+}
+
+.field-row.button-row {
+  display: flex;
+  justify-content: center;
+}
+
+.field-row:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.min {
+  flex-basis: 65%;
+}

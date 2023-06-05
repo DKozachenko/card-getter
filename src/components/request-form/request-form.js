@@ -5,32 +5,15 @@ export class RequestForm extends HTMLElement {
     const component = template.content.children[0].cloneNode(true);
     this.attachShadow({ mode: 'open' }).appendChild(component);
 
-    const style = document.createElement("style");
-    style.textContent = `.request__form {
-      width: 100%;
-      max-width: 300px;
-    
-      padding: 10px;
-      border: 2px solid #0737a1;
-      border-radius: 10px;
-    }
-    
-    .field-row.button-row {
-      display: flex;
-      justify-content: center;
-    }
-    
-    .field-row:not(:last-child) {
-      margin-bottom: 15px;
-    }
-    
-    .min {
-      flex-basis: 65%;
-    }`;
     const linkElem = document.createElement('link');
     linkElem.setAttribute('rel', 'stylesheet');
-    linkElem.setAttribute('href', 'https://unpkg.com/98.css');
-    this.shadowRoot.append(style, linkElem);
+    linkElem.setAttribute('href', 'components/request-form/request-form.css');
+    this.shadowRoot.append(linkElem);
+
+    const libLinkElem = document.createElement('link');
+    libLinkElem.setAttribute('rel', 'stylesheet');
+    libLinkElem.setAttribute('href', 'assets/98.css');
+    this.shadowRoot.append(libLinkElem);
 
     this.queryParams = {
       cardNumber: 1

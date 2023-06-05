@@ -11,36 +11,20 @@ export class PlayingCard extends HTMLElement {
       contentList.removeChild(this);
     });
 
-    const style = document.createElement("style");
-    style.textContent = `.card {
-      width: 100%;
-      max-width: 300px;
-      margin-bottom: 10px;
-    }
-    
-    .card__image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    
-      max-height: 300px;
-      overflow: hidden;
-    }
-    
-    .card__image img {
-      display: block;
-      height: auto;
-      width: 250%;
-    }`;
     const linkElem = document.createElement('link');
     linkElem.setAttribute('rel', 'stylesheet');
-    linkElem.setAttribute('href', 'https://unpkg.com/98.css');
-    this.shadowRoot.append(style, linkElem);
+    linkElem.setAttribute('href', 'components/playing-card/playing-card.css');
+    this.shadowRoot.append(linkElem);
+
+    const libLinkElem = document.createElement('link');
+    libLinkElem.setAttribute('rel', 'stylesheet');
+    libLinkElem.setAttribute('href', 'assets/98.css');
+    this.shadowRoot.append(libLinkElem);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === 'card') {
-      const card = JSON.parse(this.getAttribute(name));
+      const card = JSON.parse(newValue);
       const title = this.shadowRoot.querySelector('.title-bar-text');
       const bodyP = this.shadowRoot.querySelector('.window-body p');
       const bodyImg = this.shadowRoot.querySelector('.window-body .card__image img');
