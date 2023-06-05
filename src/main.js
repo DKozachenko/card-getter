@@ -1,8 +1,7 @@
 'use strict'
 
 import { getRussianSuit, getRussianValue } from './utils.js';
-import { PlayingCard, createPlayingCard } from './playing-card.js';
-import { RequestForm } from './request-form.js';
+import { RequestForm, PlayingCard, createPlayingCard } from './components/index.js';
 
 const state = new Proxy({
   cards: []
